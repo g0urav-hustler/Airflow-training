@@ -32,3 +32,8 @@ with DAG("weather_dag",
         response_filter= lambda r: json.loads(r.text),
         log_response=True
         )
+        
+        transform_load_weather_data = PythonOperator(
+        task_id= 'transform_load_weather_data',
+        python_callable=transform_load_data
+        )
