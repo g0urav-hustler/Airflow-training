@@ -23,3 +23,12 @@ with DAG("weather_dag",
         http_conn_id='weathermap_api',
         endpoint='/data/2.5/weather?q=Portland&APPID=5031cde3d1a8b9469fd47e998d7aef79'
         )
+        
+        extract_weather_data = SimpleHttpOperator(
+        task_id = 'extract_weather_data',
+        http_conn_id = 'weathermap_api',
+        endpoint='/data/2.5/weather?q=Portland&APPID=5031cde3d1a8b9469fd47e998d7aef79',
+        method = 'GET',
+        response_filter= lambda r: json.loads(r.text),
+        log_response=True
+        )
