@@ -78,3 +78,5 @@ with DAG("weather_dag",
         task_id= 'transform_load_weather_data',
         python_callable=transform_load_data
         )
+        
+        is_weather_api_ready >> extract_weather_data >> transform_load_weather_data
