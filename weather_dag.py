@@ -17,3 +17,9 @@ with DAG("weather_dag",
         default_args = default_args,
         schedule_interval = "@daily",
         catchup = False) as dag:
+        
+        is_weather_api_ready = HttpSensor(
+        task_id ='is_weather_api_ready',
+        http_conn_id='weathermap_api',
+        endpoint='/data/2.5/weather?q=Portland&APPID=5031cde3d1a8b9469fd47e998d7aef79'
+        )
